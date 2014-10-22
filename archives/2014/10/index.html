@@ -63,6 +63,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android-AutoPacking-Shell" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/22/Android-AutoPacking-Shell/" class="article-date">
+  <time datetime="2014-10-22T06:09:53.000Z" itemprop="datePublished">Oct 22 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/22/Android-AutoPacking-Shell/">Android自动化打包脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>核心脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ apktool d <span class="operator">-f</span> application.apk  [解开apk包]</div></pre></td></tr></table></figure>
+
+<p>根据需求修改内部资源</p>
+<p>…</p>
+<p>重新打包成新的apk包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ apktool b application.apk  application_new.apk</div></pre></td></tr></table></figure>
+
+<p>重新签名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ jarsigner -verbose -keystore name.keystore -STOREPASS passwd application_new.apk name -KEYPASS passwd -digestalg SHA1 -sigalg MD5withRSA</div></pre></td></tr></table></figure>
+
+<p>优化对齐apk</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ zipalign -v <span class="number">4</span> application_new.apk application_new_zipaligned.apk</div></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<pre><code>通过jar程序执行<span class="keyword">shell</span>可能会遇到<span class="keyword">command</span> not found的问题 ，虽然将一些必要的工具路径加入了环境变量，通过控制台执行<span class="keyword">shell</span>可以正常运行，原因是通过外部代码调用执行脚本时候，找不到环境变量，可以在<span class="keyword">shell</span>脚本里面再执行一次export PATH的操作，将需要的工具加入PATH
+
+<span class="keyword">ex</span>：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">export</span> PATH=<span class="string">"/Users/captain/program/apktools:<span class="variable">$PATH</span>"</span></div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/10/22/Android-AutoPacking-Shell/" data-id="eq7zgok2z49mvqcu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Conquer" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/21/Conquer/" class="article-date">
@@ -189,7 +245,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -199,6 +255,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/10/22/Android-AutoPacking-Shell/">Android自动化打包脚本</a>
+          </li>
         
           <li>
             <a href="/2014/10/21/Conquer/">Conquer</a>
