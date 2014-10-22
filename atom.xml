@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2014-10-22T05:12:06.519Z</updated>
+  <updated>2014-10-22T05:57:16.330Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,21 +19,21 @@
     <link href="http://yoursite.com/2014/10/21/Conquer/"/>
     <id>http://yoursite.com/2014/10/21/Conquer/</id>
     <published>2014-10-21T06:45:27.000Z</published>
-    <updated>2014-10-22T05:10:21.000Z</updated>
+    <updated>2014-10-22T05:56:45.000Z</updated>
     <content type="html"><![CDATA[<p>Android自动化打包脚本</p>
 <p>核心脚本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ apktool d <span class="operator">-f</span> application.apk  [解开apk包]</div></pre></td></tr></table></figure>
 
 <p>根据需求修改内部资源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ apktool b application.apk  application_new.apk [重新打包成新的apk包]</div></pre></td></tr></table></figure>
+<p>…</p>
+<p>重新打包成新的apk包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ apktool b application.apk  application_new.apk</div></pre></td></tr></table></figure>
 
+<p>重新签名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ jarsigner -verbose -keystore name.keystore -STOREPASS passwd application_new.apk name -KEYPASS passwd -digestalg SHA1 -sigalg MD5withRSA</div></pre></td></tr></table></figure>
 
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ jarsigner -verbose -keystore name.keystore -STOREPASS passwd application_new.apk name -KEYPASS passwd -digestalg SHA1 -sigalg MD5withRSA [重新签名]</div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ zipalign -v <span class="number">4</span> application_new.apk application_new_zipaligned.apk [优化对其apk]</div></pre></td></tr></table></figure>
+<p>优化对其apk</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ zipalign -v <span class="number">4</span> application_new.apk application_new_zipaligned.apk</div></pre></td></tr></table></figure>
 
 <p>注意：</p>
 <pre><code>通过jar程序执行<span class="keyword">shell</span>可能会遇到<span class="keyword">command</span> not found的问题 ，虽然将一些必要的工具路径加入了环境变量，通过控制台执行<span class="keyword">shell</span>可以正常运行，原因是通过外部代码调用执行脚本时候，找不到环境变量，可以在<span class="keyword">shell</span>脚本里面再执行一次export PATH的操作，将需要的工具加入PATH
